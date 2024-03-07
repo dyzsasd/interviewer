@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import axios from 'axios';
 import { createI18n } from 'vue-i18n';
+import './assets/styles/tailwind.css';
 
 // Axios 配置
 const app = createApp(App);

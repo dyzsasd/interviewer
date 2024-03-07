@@ -1,38 +1,34 @@
-import { createApp } from 'vue'
-import Vue from 'vue'
-import App from './App.vue'
-import './assets/tailwind.css'
-import axios from 'axios'
-import VueI18n from 'vue-i18n'
+import { createApp } from 'vue';
+import App from './App.vue';
+import axios from 'axios';
+import { createI18n } from 'vue-i18n';
 
-Vue.config.productionTip = false
-Vue.use(VueI18n)
+// Axios 配置
+const app = createApp(App);
+app.config.globalProperties.$axios = axios; // 将 axios 设置为全局可用
+axios.defaults.baseURL = 'http://localhost:8000'; // 设置默认的请求 URL
 
-// 配置 Axios
-Vue.prototype.$axios = axios
-axios.defaults.baseURL = 'http://localhost:8000' // 调整为 Django 服务器的地址
-
-// 国际化的消息
+// I18n 配置
 const messages = {
-    en: {
-      message: {
-        hello: 'hello world'
-      }
+  en: {
+    message: {
+      hello: 'Hello world',
     },
-    zh: {
-      message: {
-        hello: '你好，世界'
-      }
-    }
-  }
+  },
+  zh: {
+    message: {
+      hello: '你好，世界',
+    },
+  },
+};
 
-// 创建 VueI18n 实例
-const i18n = new VueI18n({
-  locale: 'en', // 设置地区
-  messages, // 设置地区信息
-})
+const i18n = createI18n({
+  locale: 'en', // 设置默认语言
+  fallbackLocale: 'en', // 设置备用语言
+  messages,
+});
 
-new Vue({
-  i18n,
-  render: h => h(App),
-}).$mount('#app')
+// 应用 I18n 插件
+app.use(i18n);
+
+app.mount('#app');

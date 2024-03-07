@@ -1,8 +1,10 @@
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from .form import InterviewDocumentForm
 
 
+@csrf_exempt
 def upload_documents(request):
     if request.method == 'POST':
         form = InterviewDocumentForm(request.POST, request.FILES)

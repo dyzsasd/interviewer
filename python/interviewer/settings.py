@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'simulator'
+    'corsheaders',
+    'simulator',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'interviewer.urls'
@@ -141,3 +144,7 @@ LANGUAGE_CODE = 'en-us'
 USE_I18N = True
 
 USE_L10N = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8081",  # Adjust the port if your Vue.js app runs on a different one
+]
